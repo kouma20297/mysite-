@@ -1,0 +1,44 @@
+{% extends "app/base.html" %}
+<!-- 連携している -->
+
+{% block content %}
+<!-- 内容 -->
+
+<div class="row my-4">
+    <div class="col-md-8">
+        {% for post in post_data %}
+        <!-- viewから渡されたデータを取得する-->
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <!-- タイトルを取得してる -->
+                    <p class="card-text">{{ post.content|truncatechars:100 }}</p>
+                    <!-- 投稿の内容を取得 -->
+                    <!-- 百文字で制限して取得している -->
+                    <div class="btn btn-warning">詳細</div>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ post.created|date }} by {{ post.author }}
+                    <!-- 日付と筆者を取得している -->
+                </div>
+                <a class="stretched-link" href="{% url 'post_detail' post.id %}"></a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <h5 class="card-header">このチュートリアルについて</h5>
+            <div class="card-body">
+                <p>ステップ1</p>
+                <p class="mb-0">
+                    初めてDjangoを触る方向けのチュートリアルです。
+                    最小限の機能を構築してDjangoを学習しましょう。
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
